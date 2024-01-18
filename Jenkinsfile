@@ -46,7 +46,6 @@ pipeline {
                     dir('eks'){
                         sh 'terraform plan'
                     }
-                    input(message: "Are you sure to proceed?", ok: "Proceed")
                 }
             }
         }
@@ -62,10 +61,10 @@ pipeline {
         stage('Deploying Application') {
             steps{
                 script{
-                    dir('eks/config-files') {
+                    dir('eks/config-files/') {
                         sh 'aws eks update-kubeconfig --name eks-cluster'
-                        sh 'kubectl apply -f deployment.yaml'
-                        sh 'kubectl apply -f service.yaml'
+                        sh 'kubectl apply -f deployment.yml'
+                        sh 'kubectl apply -f service.yml'
                     }
                 }
             }

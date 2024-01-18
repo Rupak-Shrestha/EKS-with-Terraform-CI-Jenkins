@@ -53,7 +53,7 @@ pipeline {
             steps{
                 script{
                     dir('eks') {
-                        sh 'terraform distroy --auto-approve'
+                        sh 'terraform destroy --auto-approve'
                     }
                 }
             }

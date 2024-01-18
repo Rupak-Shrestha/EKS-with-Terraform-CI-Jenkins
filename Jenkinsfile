@@ -49,7 +49,7 @@ pipeline {
                 }
             }
         }
-        stage('Creating/Destroying an EKS Cluster'){
+        stage('Creating EKS Cluster'){
             steps{
                 script{
                     dir('eks') {

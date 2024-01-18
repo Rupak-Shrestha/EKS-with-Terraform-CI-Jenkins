@@ -61,7 +61,7 @@ pipeline {
         stage('Deploying Application') {
             steps{
                 script{
-                    dir('eks/config-files/') {
+                    dir('config-files/') {
                         sh 'aws eks update-kubeconfig --name eks-cluster'
                         sh 'kubectl apply -f deployment.yml'
                         sh 'kubectl apply -f service.yml'

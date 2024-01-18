@@ -1,6 +1,6 @@
 data "aws_ami" "example" {
-  most_recent      = true
-  owners           = ["amazon"]
+  most_recent = true
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
@@ -18,6 +18,6 @@ data "aws_ami" "example" {
   }
 }
 
-data "aws_availability_zone" "azs" {
-  
+data "aws_availability_zones" "azs" {
+
 }

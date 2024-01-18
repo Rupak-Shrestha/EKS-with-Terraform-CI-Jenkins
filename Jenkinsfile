@@ -8,16 +8,15 @@ pipeline {
     stages {
         stage('Checkout SCM'){
             steps{
-                sh 'echo passed'
-                // script{
-                //     checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Rupak-Shrestha/EKS-with-Terraform-CI-Jenkins.git']])
-                // }
+                script{
+                    checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Rupak-Shrestha/EKS-with-Terraform-CI-Jenkins.git']])
+                }
             }
         }
         stage('Initializing Terraform'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('eks'){
                         sh 'terraform init'
                     }
                 }
@@ -26,7 +25,7 @@ pipeline {
         stage('Formatting Terraform Code'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('eks'){
                         sh 'terraform fmt'
                     }
                 }
@@ -35,7 +34,7 @@ pipeline {
         stage('Validating Terraform'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('eks'){
                         sh 'terraform validate'
                     }
                 }
@@ -44,7 +43,7 @@ pipeline {
         stage('Planning Terraform'){
             steps{
                 script{
-                    dir('EKS'){
+                    dir('eks'){
                         sh 'terraform plan'
                     }
                     input(message: "Are you sure to proceed?", ok: "Proceed")
@@ -54,7 +53,7 @@ pipeline {
         stage('Creating/Destroying an EKS Cluster'){
             steps{
                 script{
-                    dir('EKS') {
+                    dir('eks') {
                         sh 'terraform $action --auto-approve'
                     }
                 }
